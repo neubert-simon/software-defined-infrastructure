@@ -3,3 +3,6 @@ theme:
   name: material
   palette:
     scheme: slate
+use_directory_urls: false
+markdown_extensions:
+  - attr_list
