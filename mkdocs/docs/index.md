@@ -12,7 +12,7 @@ It details some information about used commands, the environment the solutions w
 The documentation has been written as documentation of results, but in a manner that can be followed along to reproduce said results.
 If exercises build on each other, previous solution approaches are presumed to be known and won't be rehashed in detail for each individual documentation.
 
-## General setup
+## Prerequisites
 To follow the solutions provided, please ensure the following prerequisites are met:
 
 - [Generating SSH Key-Pair](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)

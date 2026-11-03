@@ -8,7 +8,6 @@ A script to prepare the shell and call `terraform apply` lays in the _Terraform_
 └── Terraform
     ├── apply.sh
     └── ...
-
 ```
 
 It can be called with any exercise number as a command line argument.

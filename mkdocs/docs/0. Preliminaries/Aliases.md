@@ -16,5 +16,5 @@ Since multiple key-pairs were available on the host system, an alias was created
 ```
 alias vci='check-jsonschema --schemafile https://raw.githubusercontent.com/canonical/cloud-init/main/cloudinit/config/schemas/schema-cloud-config-v1.json'
 ```
-Short for `validate cloud-init`, this alias was used to shorten the call to the _yaml_ validation utility `check-jsonschema`.
-Since the _cloud-init_ package is not available for the system used during course work, the [official JSON schema](https://raw.githubusercontent.com/canonical/cloud-init/main/cloudinit/config/schemas/schema-cloud-config-v1.json) by [Canonical](https://canonical.com) was used to validate configurations via [check-jsonschema](https://formulae.brew.sh/formula/check-jsonschema).
+Short for `validate cloud-init`, this alias was used to shorten the call to a third-party validation utility.
+Since the _cloud-init_ package is not available for the system used during course work, the [official JSON schema](https://raw.githubusercontent.com/canonical/cloud-init/main/cloudinit/config/schemas/schema-cloud-config-v1.json) by [Canonical](https://canonical.com) was used to validate _yaml_ configurations via [check-jsonschema](https://formulae.brew.sh/formula/check-jsonschema).
