@@ -17,6 +17,8 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII12SWradHBuyiHJDTJmulP9LMsEeyXajvaCnZxgtKh0 sn067@hdm-stuttgart.de
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKY24AeEibQGSMPtstaN4REByLCM3kzjM//apEZ9WyUB goik@hdm-stuttgart.de
 
+ssh_pwauth: false
+
 write_files:
   - path: /etc/ssh/sshd_config.d/ssh-hardening.conf
     content: |
