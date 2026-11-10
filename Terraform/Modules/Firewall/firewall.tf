@@ -4,7 +4,7 @@ locals {
       description = "Allow SSH"
       direction   = "in"
       protocol    = "tcp"
-      port        = "2222"
+      port        = "22"
       source_ips  = ["0.0.0.0/0", "::/0"]
     }
 
