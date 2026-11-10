@@ -1,7 +1,5 @@
 #!/bin/bash
-
 set -e
-
 EX=$1
 
 if ! [[ $EX =~ ^[0-9]+$ && $EX -ge 19 && $EX -le 38 ]]; then

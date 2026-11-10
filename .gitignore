@@ -39,5 +39,6 @@ venv/
 # mkdocs
 /site
 
+# Project files
 Conf/config.tf
-
+gen/

@@ -6,10 +6,12 @@ These are documented here in case they show up in screenshots of the conducted s
 ### SSHDM
 
 ``` bash
-alias sshdm="ssh -i ~/.ssh/hdm"
+alias sshdm="ssh -A -i ~/.ssh/hdm"
 ```
+
 The public / private key-pair `hdm` was used during the exercise period.
 Since multiple key-pairs were available on the host system, an alias was created to make connecting to the Hetzner instances easier.
+The flag `-i` passes the specified private key file which will be used to authenticate against the server, while `-A` enables ssh-agent forwarding.
 
 ### VCI
 

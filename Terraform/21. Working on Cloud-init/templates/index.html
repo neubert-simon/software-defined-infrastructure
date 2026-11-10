@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Template demo</title>
+</head>
+<body>
+<h1>Terraform template file demo created ${creationDate}.</h1>
+<p>This is server <b>${serverName}</b> with IP addresses:</p>
+<ul>
+    <li>IPV4: <a href="http://${ipv4Address}">${ipv4Address}</a></li>
+    <li>IPV6: <a href="http://[${ipv6Address}]">${ipv6Address}</a> from subnet ${ipv6Subnet}</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,19 @@
+#cloud-config
+
+${yamlencode({
+    write_files = [
+  {
+    content     = "${html}"
+    path        = "/var/www/html/index.html"
+    permissions = "0644"
+    owner       = "root:root"
+  }
+]
+
+    packages = ["nginx"]
+    
+    runcmd = [
+    "systemctl enable nginx",
+    "systemctl start nginx"
+]
+})}

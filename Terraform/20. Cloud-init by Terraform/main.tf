@@ -1,3 +1,4 @@
+# Register the provider
 terraform {
   required_providers {
     hcloud = {
