@@ -10,8 +10,9 @@ echo "Creating Terraform project \"$1\""
 
 mkdir -p "$EX/templates"
 
-cp "Templates/.env.template" "./$EX/.env"
+cp "Templates/.env" "./$EX/.env"
 cp "Templates/setup.tf.template" "./$EX/setup.tf"
+cp "Templates/firewall.tf.template" "./$EX/firewall.tf"
 cp "Templates/main.tf.template" "./$EX/main.tf"
 
 cd "./$EX"

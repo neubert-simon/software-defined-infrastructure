@@ -1,0 +1,24 @@
+output "authorizedKeys" {
+  description = "List of authorized users' public ssh keys"
+  type        = map(string)
+
+  value = {
+    ADD YOUR SSH KEYS HERE
+  }
+}
+
+output "loginUserName" {
+  description = "Login user's name with admin privileges"
+  type        = string
+  value       = "devops"
+}
+
+output "bin" {
+  description = "Local user bin directory"
+  type = string
+  value = ADD YOUR bin DIRECTORY OR ANY DIRECTORY ON YOUR PATH HERE (ensure terraform can write to the directory)
+}
+
+output "pk" {
+  value = "YOUR PRIVATE KEY FILE LOCATION HERE"
+}

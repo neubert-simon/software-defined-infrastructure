@@ -10,7 +10,9 @@ Before viewing the solutions, it is advisable to read through the <a href="0.%20
 It details some information about used commands, the environment the solutions were implemented in, etc. 
 
 The documentation has been written as documentation of results, but in a manner that can be followed along to reproduce said results.
-If exercises build on each other, previous solution approaches are presumed to be known and won't be rehashed in detail for each individual documentation.
+If exercises build on each other, previous solution approaches are presumed to be known and won't be rehashed in detail for each individual exercise.
+
+Solutions were produced on `OS X`. Operating System differences may lead to solutions not working right out of the box without adjustments (e.g. differences in file path semantics, etc.). 
 
 ## Prerequisites
 To follow the solutions provided, please ensure the following prerequisites are met:

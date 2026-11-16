@@ -14,46 +14,23 @@ resource "hcloud_primary_ip" "ipv6" {
 }
 #endregion
 
-#region Firewalls
-module "firewall" {
-  source = "../Modules/Firewall"
-}
-
-resource "hcloud_firewall" "nginx" {
-  name = "nginx"
-
-  dynamic "rule" {
-    for_each = {
-      for name in ["ssh", "icmp", "http"] : name => module.firewall.firewall_rules[name]
-    }
-    content {
-      description = rule.value.description
-      direction   = rule.value.direction
-      protocol    = rule.value.protocol
-      port        = rule.value.protocol == "icmp" ? null : rule.value.port
-      source_ips  = rule.value.source_ips
-    }
-  }
-}
-#endregion
-
 #region Templates
 resource "local_file" "index" {
-  content = templatefile("templates/index.html", {
+  content = templatefile("${path.module}/templates/index.html", {
     creationDate = timestamp()
     serverName   = module.server.serverName_g01
     ipv4Address  = hcloud_primary_ip.ipv4.ip_address
     ipv6Address  = hcloud_primary_ip.ipv6.ip_address
     ipv6Subnet   = hcloud_primary_ip.ipv6.ip_network
   })
-  filename = "gen/index.html"
+  filename = "${path.module}/gen/index.html"
 }
 
 resource "local_file" "cloud-init" {
-  content = templatefile("templates/cloud-init.yaml", {
+  content = templatefile("${path.module}/templates/cloud-init.yaml", {
     html = local_file.index.content
   })
-  filename = "gen/cloud-init.yaml"
+  filename = "${path.module}/gen/cloud-init.yaml"
 }
 #endregion
 

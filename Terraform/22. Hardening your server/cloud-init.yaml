@@ -1,0 +1,33 @@
+#cloud-config
+
+package_reboot_if_required: true
+package_update: true
+package_upgrade: true
+
+packages:
+  - nginx
+  - fail2ban
+  - plocate
+
+users:
+  - name: devops
+    groups: users, admin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII12SWradHBuyiHJDTJmulP9LMsEeyXajvaCnZxgtKh0 sn067@hdm-stuttgart.de
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKY24AeEibQGSMPtstaN4REByLCM3kzjM//apEZ9WyUB goik@hdm-stuttgart.de
+
+write_files:
+  - path: /etc/ssh/sshd_config.d/99Local.conf
+    content: |
+      PermitRootLogin no
+      PasswordAuthentication no
+      AllowUsers devops
+
+runcmd:
+  - systemctl enable fail2ban
+  - systemctl enable nginx
+  - systemctl enable plocate
+  - sudo updatedb
+
