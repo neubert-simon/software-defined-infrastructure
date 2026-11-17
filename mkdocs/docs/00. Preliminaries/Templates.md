@@ -11,11 +11,13 @@ Templates can be found in the `Templates` directory:
     └── ...
 ```
 
-Different modules have been created based on the provided templates, which are used throughout the project.
+Different modules have been created in the `Modules` directory, which provide _outputs_ that are used throughout the project.
 To learn more, visit:
-- [Terraform - Modules](https://developer.hashicorp.com/terraform/language/modules)
 
-> If you elect not to use the [init.sh](Scripts.md#init-script-_initsh_) script when creating a new module for an exercise, you need to manually copy the template files into the exercise directory.
+- [HashiCorp - Modules](https://developer.hashicorp.com/terraform/language/modules)
+- [HashiCorp - Outputs](https://developer.hashicorp.com/terraform/language/values/outputs)
+
+> If you elect not to use the [init.sh](Scripts.md#init-script-_initsh_) script when creating a new module for an exercise, you need to manually copy the template files into the exercise directory and remove the `.template` suffix.
 
 ## .env.template
 
@@ -24,6 +26,7 @@ Copy the template into the desired exercise directory and change the contents to
 Rename the file to `.env` and source it to reproduce the documented results.
 
 To learn more, visit:
+
 - [Dotenv](https://dotenvx.com/docs/env-file/)
 - [The Linux Documentation Project - Sourcing a file](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x237.html)
 
@@ -42,6 +45,10 @@ output "authorizedKeys" {
 }
 ```
 
+To learn how to utilize maps, visit:
+
+- [HashiCorp - Terraform Types and Values](https://developer.hashicorp.com/terraform/language/expressions/types#map)
+
 You may change the username for authorized users on the servers. The default value is `devops`:
 ```terraform
 output "loginUserName" {
@@ -53,6 +60,7 @@ output "loginUserName" {
 
 To execute generated shell script from any location on your file system, the exercises create them in a user specified directory.
 You may supply a `bin` directory, or any directory on your `$PATH`:
+
 ```terraform
 output "bin" {
   description = "Local user bin directory"
@@ -60,8 +68,14 @@ output "bin" {
   value = ADD YOUR bin DIRECTORY OR ANY DIRECTORY ON YOUR PATH HERE (ensure terraform can write to the directory)
 }
 ```
+
 **Note**:
 > If you wish to chose a location for the scripts that isn't known via `$PATH`, take care to invoke the scripts like you would any regular shell script (`./`).
+
+To learn more, visit;
+
+- [The Linux Documentation Project - PATH](https://www.linfo.org/path_env_var.html)
+- [The Linux Foundation - /bin](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s04.html)
 
 ## Firewall
 
@@ -86,6 +100,11 @@ resource "hcloud_firewall" "TEMPLATE" {
 }
 ```
 
+To learn more, visit:
+
+- [Terraform Registry - hcloud_firewall](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall)
+- [HashiCorp - Dynamic Blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks)
+
 One example of a common firewall rule (_SSH-Traffic via 22_) inside `firewall.tf.template`:
 ```terraform
 locals {
@@ -99,6 +118,10 @@ locals {
     }
     ...
 ```
+
+To learn more, visit:
+
+- [HashiCorp - Locals](https://developer.hashicorp.com/terraform/language/values/locals)
 
 These rules are accessible via the modules `output` directive:
 ```terraform
@@ -121,6 +144,10 @@ resource "hcloud_server" "g01" {
   ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
 }
 ```
+
+To learn more, visit:
+
+-[Terraform Registry - hcloud_server](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/server.html)
 
 These default values are accessible via the modules `output` directive, of which this is one example:
 ```terraform
