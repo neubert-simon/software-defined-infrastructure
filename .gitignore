@@ -40,5 +40,5 @@ venv/
 /site
 
 # Project files
-Conf/config.tf
+*Conf/config.tf
 gen/

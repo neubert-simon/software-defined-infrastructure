@@ -1,12 +1,13 @@
-# Templates
+# Templates and Modules
 
-Templates can be found in the `Modules` directory:
+Templates can be found in the `Templates` directory:
 ```
 .
 ├── README.md
 ├── mkdocs
 └── Terraform
-    ├── Modules
+    ├── Templates
+    └── Modules
     └── ...
 ```
 
@@ -14,9 +15,11 @@ Different modules have been created based on the provided templates, which are u
 To learn more, visit:
 - [Terraform - Modules](https://developer.hashicorp.com/terraform/language/modules)
 
+> If you elect not to use the [init.sh](Scripts.md#init-script-_initsh_) script when creating a new module for an exercise, you need to manually copy the template files into the exercise directory.
+
 ## .env.template
 
-This template contains the environment variables which are used throughout all solutions.
+This template contains the environment variables which are used throughout many solutions.
 Copy the template into the desired exercise directory and change the contents to contain your secrets.
 Rename the file to `.env` and source it to reproduce the documented results.
 
@@ -27,23 +30,42 @@ To learn more, visit:
 ## Conf
 
 The file `Modules/Config/config.tf` contains commonly used values, including SSH-keys of authorized users for the servers created when running the exercise solutions.
-If you wish to add an SSH-key, it is sufficient to add it to the `authorizedKeys` output directive, it will be applied to all exercise solutions:
+Update `config.tf.template` with your desired values and rename it to `config.tf`.
+
+If you wish to add an SSH-key, it is sufficient to add it to the `authorizedKeys` output directive, it will be applied to all exercise solutions using it:
 
 ```terraform
 output "authorizedKeys" {
-  type = map(string)
-  value = {
-    neubert = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII12SWradHBuyiHJDTJmulP9LMsEeyXajvaCnZxgtKh0 sn067@hdm-stuttgart.de"
-    goik    = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKY24AeEibQGSMPtstaN4REByLCM3kzjM//apEZ9WyUB goik@hdm-stuttgart.de"
-  }
+  description = "List of authorized users' public ssh keys"
+  type        = map(string)
+  value = { ADD YOUR SSH KEYS HERE }
 }
 ```
 
-The file has been committed to version control for easy reproducibility and to allow a complete recreation of the local setup for grading purposes.
+You may change the username for authorized users on the servers. The default value is `devops`:
+```terraform
+output "loginUserName" {
+  description = "Login user's name with admin privileges"
+  type        = string
+  value       = "devops"
+}
+```
+
+To execute generated shell script from any location on your file system, the exercises create them in a user specified directory.
+You may supply a `bin` directory, or any directory on your `$PATH`:
+```terraform
+output "bin" {
+  description = "Local user bin directory"
+  type = string
+  value = ADD YOUR bin DIRECTORY OR ANY DIRECTORY ON YOUR PATH HERE (ensure terraform can write to the directory)
+}
+```
+**Note**:
+> If you wish to chose a location for the scripts that isn't known via `$PATH`, take care to invoke the scripts like you would any regular shell script (`./`).
 
 ## Firewall
 
-The file `Modules/Firewall/firewall.tf` contains common firewall rules, which can be added to the dynamic rule creation present in `Templates/main.tf.template`:
+The file `Modules/Firewall/firewall.tf` contains common firewall rules, which can be added to the dynamic rule creation present in `Templates/firewall.tf.template`:
 
 ```terraform
 resource "hcloud_firewall" "TEMPLATE" {
@@ -64,7 +86,7 @@ resource "hcloud_firewall" "TEMPLATE" {
 }
 ```
 
-One example of a common firewall rule (_SSH-Traffic via 22_):
+One example of a common firewall rule (_SSH-Traffic via 22_) inside `firewall.tf.template`:
 ```terraform
 locals {
   firewall_rules = {
