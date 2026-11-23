@@ -1,6 +1,6 @@
 output "serverType" {
   description = "The cheapest server Type (cx23)"
-  value = "cx23"
+  value = "cx23" // Use cpx02 if cx23 is unavailable
 }
 
 output "serverImage" {

@@ -14,4 +14,17 @@ resource "hcloud_server" "g01" {
 
   depends_on = [local_file.user_data]
 }
+
+# Create SSH wrappers
+module "ssh_wrapper" {
+  source           = "../Modules/SshKnownHosts"
+  moduleDir        = abspath(path.module)
+  bin              = module.config.bin
+  user_private_key = module.config.pk
+  host_public_key  = tls_private_key.host.public_key_openssh
+  server           = hcloud_server.g01.id
+  user             = module.config.loginUserName
+
+  depends_on = [hcloud_server.g01]
+}
 #endregion

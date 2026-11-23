@@ -22,8 +22,8 @@ To learn more, visit:
 ## .env.template
 
 This template contains the environment variables which are used throughout many solutions.
-Copy the template into the desired exercise directory and change the contents to contain your secrets.
-Rename the file to `.env` and source it to reproduce the documented results.
+**Copy the template into the desired exercise directory and change the contents to contain your secrets.
+Rename the file to `.env` and source it to reproduce the documented results.**
 
 To learn more, visit:
 
@@ -147,7 +147,7 @@ resource "hcloud_server" "g01" {
 
 To learn more, visit:
 
--[Terraform Registry - hcloud_server](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/server.html)
+- [Terraform Registry - hcloud_server](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/server.html)
 
 These default values are accessible via the modules `output` directive, of which this is one example:
 ```terraform

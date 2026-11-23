@@ -1,0 +1,31 @@
+#cloud-config
+
+package_reboot_if_required: true
+package_update: true
+package_upgrade: true
+  
+${yamlencode({
+  users = [
+  {
+  name                = devopsUsername
+  groups              = ["users", "admin"]
+  sudo                = "ALL=(ALL) NOPASSWD:ALL"
+  shell               = "/bin/bash"
+  ssh_authorized_keys = values(ssh_authorized_keys)
+  }
+  ]
+})}
+
+${yamlencode({
+  ssh_keys = {
+  ed25519_private = host_ed25519_private
+  ed25519_public  = host_ed25519_public
+  }
+})}
+
+write_files:
+  - path: /etc/ssh/sshd_config.d/99Local.conf
+    content: |
+      PermitRootLogin no
+      PasswordAuthentication no
+      AllowUsers ${devopsUsername}
