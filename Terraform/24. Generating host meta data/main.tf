@@ -7,7 +7,7 @@ resource "hcloud_server" "g01" {
   server_type = module.server.serverType
   location    = module.server.serverLocation
 
-  firewall_ids = [hcloud_firewall.SSH.id]
+  firewall_ids = [module.firewall.firewallID]
   ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
 
 }

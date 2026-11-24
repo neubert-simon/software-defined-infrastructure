@@ -21,7 +21,7 @@ resource "hcloud_server" "g01" {
   location    = module.server.serverLocation
 
   ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
-  firewall_ids = [hcloud_firewall.SSH.id]
+  firewall_ids = [module.firewall.firewallID]
   user_data    = local_file.user_data.content
 
   depends_on = [local_file.user_data]

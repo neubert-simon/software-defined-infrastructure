@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ssh -i "${pk}" -o "UserKnownHostsFile=\"${genDir}/known_hosts\"" ${user}@${ip} "$@"
+ssh -i "${pk}" -o "UserKnownHostsFile=\"${exDir}/gen/known_hosts\"" ${user}@${ip} "$@"

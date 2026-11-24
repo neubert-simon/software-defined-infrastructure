@@ -3,5 +3,5 @@
 if [ $# -lt 2 ]; then
    echo "usage: .../bin/scp ... devops@${ip} ..."
 else
-   scp -i "${pk}" -o "UserKnownHostsFile=\"${genDir}/known_hosts\"" "$@"
+   scp -i "${pk}" -o "UserKnownHostsFile=\"${exDir}/gen/known_hosts\"" "$@"
 fi

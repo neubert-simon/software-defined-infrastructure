@@ -1,5 +1,3 @@
-#region Server
-
 # Set up the default server
 resource "hcloud_server" "g01" {
   name         = module.server.serverName_g01
@@ -10,21 +8,7 @@ resource "hcloud_server" "g01" {
   firewall_ids = [module.firewall.firewallID]
   ssh_keys     = module.hetzner.authorizedKeys
 
-  user_data    = local_file.user_data.content
+  user_data    = module.ssh.ssh_config
 
-  depends_on = [local_file.user_data]
+  depends_on   = [module.server, module.hetzner, module.ssh, module.firewall]
 }
-
-# Create SSH wrappers
-module "ssh_wrapper" {
-  source           = "../Modules/SshKnownHosts"
-  moduleDir        = abspath(path.module)
-  bin              = module.config.bin
-  user_private_key = module.config.pk
-  host_public_key  = tls_private_key.host.public_key_openssh
-  server           = hcloud_server.g01.id
-  user             = module.config.loginUserName
-
-  depends_on = [hcloud_server.g01]
-}
-#endregion

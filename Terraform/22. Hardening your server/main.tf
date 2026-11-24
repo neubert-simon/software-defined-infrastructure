@@ -11,7 +11,7 @@ resource "hcloud_server" "g01" {
   location     = module.server.serverLocation
 
   ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
-  firewall_ids = [hcloud_firewall.HTTP.id]
+  firewall_ids = [module.firewall.firewallID]
 
   user_data = file("cloud-init.yaml")
 }

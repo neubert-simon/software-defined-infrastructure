@@ -45,7 +45,7 @@ resource "hcloud_server" "g01" {
   server_type  = module.server.serverType
   location     = module.server.serverLocation
   ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
-  firewall_ids = [hcloud_firewall.nginx.id]
+  firewall_ids = [module.firewall.firewallID]
 
   public_net {
     ipv4 = hcloud_primary_ip.ipv4.id

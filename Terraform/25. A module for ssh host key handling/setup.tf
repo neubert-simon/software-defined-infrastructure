@@ -21,7 +21,7 @@ variable "hcloud_token" {
 
 provider "hcloud" { token = var.hcloud_token }
 
-# Load the common configuration
+# Common configuration
 module "config" { source = "../Modules/Conf" }
 
 module "server" { source = "../Modules/Server" }
@@ -31,7 +31,14 @@ module "hetzner" {
   hcloud_token = var.hcloud_token
 }
 
+# Firewall
 module "firewall" {
   source = "../Modules/Firewall"
   rules = ["ssh"]
+}
+
+#SSH config
+module "ssh" {
+  source = "../Modules/SSH"
+  moduleDir = abspath(path.module)
 }

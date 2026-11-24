@@ -9,7 +9,7 @@ variable "user" {
 }
 
 variable "user_private_key" {
-  description = "Private key to authenticate via ssh with"
+  description = "Private key file to authenticate via ssh with"
   type        = string
   sensitive   = true
   nullable    = true

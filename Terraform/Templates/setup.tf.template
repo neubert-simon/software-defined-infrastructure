@@ -31,7 +31,27 @@ module "hetzner" {
   hcloud_token = var.hcloud_token
 }
 
+# Firewall
 module "firewall" {
   source = "../Modules/Firewall"
-  rules = [ADD_FIREWALL_RULE_NAMES_HERE]
+  rules = [ADD_FIREWALL_RULE_HERE]
+}
+
+#SSH config
+module "ssh" {
+  source = "../Modules/SSH"
+  moduleDir = abspath(path.module)
+}
+
+#SSH wrapper
+module "ssh_wrapper" {
+  source           = "../Modules/SshKnownHosts"
+  moduleDir        = abspath(path.module)
+  bin              = module.config.bin
+  user_private_key = module.config.pk
+  host_public_key  = module.ssh.host_public_key
+  server           = hcloud_server.g01.id
+  user             = module.config.loginUserName
+
+  depends_on = [hcloud_server.g01]
 }
