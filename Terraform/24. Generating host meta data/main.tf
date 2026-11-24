@@ -1,5 +1,4 @@
 #region Server
-module "server" { source = "../Modules/Server" }
 
 # Set up the default server
 resource "hcloud_server" "g01" {

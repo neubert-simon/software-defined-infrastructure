@@ -4,8 +4,8 @@ module "server" { source = "../Modules/Server" }
 resource "tls_private_key" "host" { algorithm = "ED25519" }
 
 resource "local_file" "user_data" {
-  filename = "${path.module}/gen/user_data.yaml"
-  content = templatefile("${path.module}/templates/userData.yaml", {
+  filename = "${path.module}/gen/user-data.yaml"
+  content = templatefile("${path.module}/templates/user-data.yaml", {
     host_ed25519_private = tls_private_key.host.private_key_openssh
     host_ed25519_public  = tls_private_key.host.public_key_openssh
     devopsUsername       = module.config.loginUserName

@@ -1,11 +1,9 @@
 #region Server
-module "server" { source = "../Modules/Server" }
-
 resource "tls_private_key" "host" { algorithm = "ED25519" }
 
 resource "local_file" "user_data" {
-  filename = "${path.module}/gen/user_data.yaml"
-  content = templatefile("${path.module}/templates/user-data.yaml", {
+  filename = "${path.module}/gen/user-data.yaml"
+  content = templatefile("${path.module}/templates/ssh.yaml", {
     host_ed25519_private = tls_private_key.host.private_key_openssh
     host_ed25519_public  = tls_private_key.host.public_key_openssh
     devopsUsername       = module.config.loginUserName
@@ -21,8 +19,8 @@ resource "hcloud_server" "g01" {
   server_type = module.server.serverType
   location    = module.server.serverLocation
 
-  firewall_ids = [hcloud_firewall.SSH.id]
-  ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
+  firewall_ids = [module.firewall.firewallID]
+  ssh_keys     = module.hetzner.authorizedKeys
 
   user_data = local_file.user_data.content
   depends_on = [local_file.user_data]

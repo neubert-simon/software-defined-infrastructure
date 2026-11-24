@@ -1,11 +1,9 @@
-module "firewall" { source = "../Modules/Firewall" }
-
-resource "hcloud_firewall" "SSH" {
-  name = "SSH"
+resource "hcloud_firewall" "firewall" {
+  name = "dynamic_firewall"
 
   dynamic "rule" {
     for_each = {
-      for name in ["ssh"] : name => module.firewall.firewall_rules[name]
+      for name in var.rules : name => local.firewall_rules[name]
     }
     content {
       description = rule.value.description

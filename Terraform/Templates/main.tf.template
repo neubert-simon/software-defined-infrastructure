@@ -1,5 +1,4 @@
 #region Server
-module "server" { source = "../Modules/Server" }
 
 # Set up the default server
 resource "hcloud_server" "g01" {
@@ -8,8 +7,9 @@ resource "hcloud_server" "g01" {
   server_type  = module.server.serverType
   location     = module.server.serverLocation
 
-  firewall_ids = [hcloud_firewall.FIREWALL_NAME_HERE.id]
-  ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
+  firewall_ids = [module.firewall.firewallID]
+  ssh_keys     = module.hetzner.authorizedKeys
+
   user_data    = local_file.user_data.content
 
   depends_on = [local_file.user_data]

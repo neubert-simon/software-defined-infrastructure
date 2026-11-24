@@ -32,8 +32,3 @@ locals {
     }
   }
 }
-
-output "firewall_rules" {
-  description = "Reusable firewall rule definitions"
-  value       = local.firewall_rules
-}

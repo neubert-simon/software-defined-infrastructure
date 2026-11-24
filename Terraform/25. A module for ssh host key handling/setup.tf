@@ -24,8 +24,14 @@ provider "hcloud" { token = var.hcloud_token }
 # Load the common configuration
 module "config" { source = "../Modules/Conf" }
 
-resource "hcloud_ssh_key" "sshKeys" {
-  for_each   = module.config.authorizedKeys
-  name       = each.key
-  public_key = each.value
+module "server" { source = "../Modules/Server" }
+
+module "hetzner" {
+  source       = "../Modules/Hetzner"
+  hcloud_token = var.hcloud_token
+}
+
+module "firewall" {
+  source = "../Modules/Firewall"
+  rules = ["ssh"]
 }
