@@ -34,3 +34,8 @@ resource "hcloud_ssh_key" "sshKeys" {
   name       = each.key
   public_key = each.value
 }
+
+module "firewall" {
+  source = "../Modules/Firewall"
+  rules = ["ssh", "icmp", "http"]
+}

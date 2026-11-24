@@ -24,7 +24,7 @@ resource "hcloud_server" "g01" {
   firewall_ids = [module.firewall.firewallID]
   user_data    = local_file.user_data.content
 
-  depends_on = [local_file.user_data]
+  depends_on   = [local_file.user_data]
 }
 #endregion
 

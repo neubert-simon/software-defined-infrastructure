@@ -1,5 +1,3 @@
-#region Server
-
 # Set up the default server
 resource "hcloud_server" "g01" {
   name        = module.server.serverName_g01
@@ -11,10 +9,9 @@ resource "hcloud_server" "g01" {
   ssh_keys     = [for key in hcloud_ssh_key.sshKeys : key.id]
 
 }
-#endregion
 
 module "metaData" {
-  source       = "../Modules/HostMetaData"
-  server       = hcloud_server.g01.id
-  depends_on   = [hcloud_server.g01]
+  source     = "../Modules/HostMetaData"
+  server     = hcloud_server.g01.id
+  depends_on = [hcloud_server.g01]
 }
